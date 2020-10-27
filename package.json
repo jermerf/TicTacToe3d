@@ -1,0 +1,35 @@
+{
+  "name": "tictactoe3d",
+  "version": "0.0.1",
+  "description": "An online multiplayer TicTacToe game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jermerf/TicTacToe3d.git"
+  },
+  "keywords": [
+    "heroku",
+    "threejs",
+    "websocket",
+    "mongoose",
+    "mongo",
+    "ajax"
+  ],
+  "author": "Jermaine Francoeur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jermerf/TicTacToe3d/issues"
+  },
+  "homepage": "https://github.com/jermerf/TicTacToe3d#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.11",
+    "ws": "^7.3.1"
+  }
+}

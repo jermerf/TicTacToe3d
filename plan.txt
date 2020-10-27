@@ -34,7 +34,7 @@ Database
     chat: [ChatMessage]
   ChatMessage _id
     content
-    sender_id
+    sender
     sentOn
 
 Ajax
