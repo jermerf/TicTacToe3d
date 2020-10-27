@@ -1,0 +1,67 @@
+This is a multiplayer online TicTacToe game that is a web app that uses: 
+
+Features
+  The game, TTT
+  Uses ThreeJS for pretty 3d graphics
+  Online multiplayer
+  Online viewing of games in progress (registration not required)
+  In game chat (requires registration)
+  Uses JWT for authentication
+  *WebRTC video/audio chat
+
+Game
+  Game logic, already done in practice
+
+Database
+  User _id
+    username
+    password
+    lastlogin
+    *wins
+    *losses
+  Game _id
+    name
+    board: default: "000000000"
+    startedOn
+    p1: User._id
+    p2: User._id
+    currentPlayer: 1, 2
+    winner: 1, 2, 3, default: 0 // Which player won
+      0: game still in progress
+      1: player 1 won
+      2: player 2 won
+      3: stalemate
+    chat: [ChatMessage]
+  ChatMessage _id
+    content
+    sender_id
+    sentOn
+
+Ajax
+CRUD
+  Create  POST    axios.post    $.post
+  Read    GET     axios.get     $.get
+  Update  PUT     axios.put     $.ajax({... method: "PUT" })
+  Delete  DELETE  axios.delete  $.ajax({... method: "DELETE" })
+
+Routing
+  Statically Serve files from our "dist" folder
+  post    /auth/register
+  post    /auth/login
+  get     /auth/check   // Are we still logged in
+
+  post    /game(name)
+  put     /game/join    // Joining games and rejoining after disconnect
+  get     /game/watch?gameid=5738KJkfdl
+
+WebSocket
+  server
+    player      x/o
+    yourturn    It is the client's turn to play
+    invalidmove The client played at an invalid position, it is still their turn
+    gameover    User wins. Include if the client has won or not
+    disconnect  Game is over
+  client
+    play        Client plays at a position on the board
+    chat        send text
+    disconnect  Forfeit after 30s
