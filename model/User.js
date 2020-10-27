@@ -20,6 +20,9 @@ UserSchema.pre('save', function (next) {
 UserSchema.methods.authenticate = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
+UserSchema.methods.giveDescriptionToYouLongNameSoYouKnowItsCustom = function () {
+  return `User ${this.username} last login on ${this.lastLogin.on}`
+}
 
 const User = model("User", UserSchema)
 
