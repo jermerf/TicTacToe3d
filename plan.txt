@@ -50,9 +50,10 @@ Routing
   post    /auth/login
   get     /auth/check   // Are we still logged in
 
-  post    /game(name)
-  put     /game/join    // Joining games and rejoining after disconnect
-  get     /game/watch?gameid=5738KJkfdl
+  get     /game         // Get list of games
+  post    /game (name)  // Create a new game
+  post     /game/join/:gameid    // Joining games and rejoining after disconnect
+  get     /game/watch/:gameid=5738KJkfdl
 
 WebSocket
   server

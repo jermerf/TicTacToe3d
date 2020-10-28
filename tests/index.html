@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+
+<body>
+  <h1>Test Game Join</h1>
+  <form action="/game/join/5f99649f2df5bb19543f2b57" method="post">
+    <button>Join 5f99649f2df5bb19543f2b57</button>
+  </form>
+  <h1>Test Game Creation</h1>
+  <form action="/game" method="post">
+    <input name="name" value="Ultimatchup!">
+    <button>Create Game</button>
+  </form>
+
+  <h1>Test Registration</h1>
+  <form action="/auth/register" method="post">
+    <input name="username" value="teacup">
+    <input name="password" value="puppies">
+    <button>Register</button>
+  </form>
+  <h1>Test Login</h1>
+  <form action="/auth/login" method="post">
+    <input name="username" value="teacup">
+    <input name="password" value="puppies">
+    <button>Login</button>
+  </form>
+
+  <form action="/auth/logout" method="post">
+    <button>Logout</button>
+  </form>
+</body>
+
+</html>
