@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
@@ -12,6 +13,11 @@ const game = require('./routers/game.js')
 const PORT = process.env.PORT || 3000
 
 var app = express()
+
+if (process.env.NODE_ENV != 'production') {
+  console.log(`DEV: Using cors()`)
+  app.use(cors())
+}
 
 // Access cookies
 app.use(cookieParser())

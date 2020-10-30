@@ -1,0 +1,20 @@
+<div class="login">
+  <div *ngIf="!showRegistration">
+    <h2>Login</h2>
+    <input [(ngModel)]="username">
+    <input [(ngModel)]="password">
+    <button (click)="login()">Login</button>
+  </div>
+
+  <button (click)="showRegistration = !showRegistration">
+    {{(showRegistration ? "Back to Login" : "Need to register?" )}}
+  </button>
+  <div *ngIf="showRegistration">
+    <h2>Registration</h2>
+    <div class="bold">Text</div>
+    <input [(ngModel)]="username">
+    <input [(ngModel)]="password">
+    <button (click)="register()">Register</button>
+  </div>
+
+</div>
