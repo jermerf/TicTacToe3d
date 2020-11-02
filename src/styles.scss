@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+body{
+  margin: 0;
+  overflow: hidden;
+  background-color: grey;
+}
+.spacer {
+  padding: 3px;
+}
+
+.container{
+  text-align: center;
+  padding: 10px;
+  background-color: #333333bb;
+  border-radius: 4px;
+  
+  $btn-margin: 5px;
+  input, button {
+    
+    color: white;
+    display: block;
+    width: calc(100% - #{2 * $btn-margin});
+    margin: $btn-margin;
+    padding: $btn-margin #{4*$btn-margin};
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #444;
+    text-align: center;
+  }
+  button{
+    background-color: #335577;
+  } 
+}
+.container.middle{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

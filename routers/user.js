@@ -1,9 +1,10 @@
 const Router = require('express').Router
 const jwt = require('jsonwebtoken')
 
-const auth = require('./middleware/auth.js')
+const auth = require('../modules/auth.js').middleware
 const User = require('../model/User.js')
 const Log = require('../model/Log.js')
+const GameManager = require('../modules/socket/GameManager.js')
 
 const MSG = {
   regDuplicate: () => ({ success: false, error: "Username taken" }),
@@ -35,8 +36,9 @@ async function Login(req, res) {
   if (user.authenticate(password)) {
     var resData = MSG.loginSuccess()
     resData.username = username
+    resData.gameInProgress = hasGameInProgress(user.id)
     var payload = {
-      _id: user._id,
+      id: user.id,
       username
     }
     var token = jwt.sign(payload, process.env.JWT_SECRET)
@@ -48,8 +50,17 @@ async function Login(req, res) {
 }
 async function CheckLogin(req, res) {
   if (req.user) {
-    res.send({ success: true, username: req.user.username })
+    res.send({
+      success: true,
+      username: req.user.username,
+      gameInProgress: hasGameInProgress(req.user.id)
+    })
   }
+}
+
+function hasGameInProgress(userId) {
+  let game = GameManager.gameByUserId(userId)
+  return !!game
 }
 
 async function Logout(req, res) {

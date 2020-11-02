@@ -1,0 +1,25 @@
+<div class="gamechooser container middle">
+  <div *ngIf="joiningGame">
+    <h2>Joining..</h2>
+  </div>
+  <div *ngIf="!joiningGame">
+    <ng-container *ngIf="showNewGame; then thenTemplate; else elseTemplate">
+    </ng-container>
+    <ng-template #thenTemplate>
+      <input id="newGame" [(ngModel)]="newGameName" (keydown.enter)="createGame()" />
+      <button (click)="createGame()">Create</button>
+      <div class="spacer"></div>
+      <button (click)="toggleNewGame()">Back</button>
+    </ng-template>
+    <ng-template #elseTemplate>
+      <h3>GAMES</h3>
+      <div *ngFor="let game of games">
+        <button class="game" (click)="joinGame(game.id)">
+          {{game.name}}
+        </button>
+      </div>
+      <div class="spacer"></div>
+      <button (click)="toggleNewGame()">Create</button>
+    </ng-template>
+  </div>
+</div>

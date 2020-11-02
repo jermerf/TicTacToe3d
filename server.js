@@ -1,4 +1,5 @@
 require('dotenv').config()
+const http = require('http')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -6,6 +7,7 @@ const cookieParser = require('cookie-parser')
 
 const database = require('./modules/database.js')
 const Log = require('./model/Log.js')
+const socketServer = require('./modules/socket-server.js')
 
 const user = require('./routers/user.js')
 const game = require('./routers/game.js')
@@ -13,6 +15,8 @@ const game = require('./routers/game.js')
 const PORT = process.env.PORT || 3000
 
 var app = express()
+var server = http.createServer(app)
+socketServer(server)
 
 if (process.env.NODE_ENV != 'production') {
   console.log(`DEV: Using cors()`)
@@ -37,4 +41,4 @@ app.use('/game', game)
 
 app.use(express.static('tests'))
 
-app.listen(PORT, () => console.log(`Listening on port [ ${PORT} ]`))
+server.listen(PORT, () => console.log(`Listening on port [ ${PORT} ]`))

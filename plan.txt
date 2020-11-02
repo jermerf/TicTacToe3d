@@ -57,12 +57,14 @@ Routing
 
 WebSocket
   server
-    player      x/o
-    yourturn    It is the client's turn to play
-    invalidmove The client played at an invalid position, it is still their turn
-    gameover    User wins. Include if the client has won or not
-    disconnect  Game is over
-  client
+    player        x/o
+    yourturn      It is the client's turn to play
+    invalidmove   The client played at an invalid position, it is still their turn
+    gameover      User wins. Include if the client has won or not
+    gamenotfound  The game you were trying to join/observe wasn't found
+    gamefull      The game you were trying to join/observe is full
+  client Player/Observer 
+    joingame    Join a game either as p1 or p2
     play        Client plays at a position on the board
     chat        send text
     disconnect  Forfeit after 30s

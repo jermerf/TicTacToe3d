@@ -1,0 +1,13 @@
+<canvas #threecan></canvas>
+<div *ngIf="loggedIn && !inGame">
+  <gamechooser></gamechooser>
+</div>
+<div *ngIf="inGame && !started" class="container middle">
+  Waiting for Opponent...
+</div>
+<div *ngIf="inGame">
+  <div [class.has-status]="status" class="game-status container middle">
+    {{status}}
+  </div>
+  <chat></chat>
+</div>

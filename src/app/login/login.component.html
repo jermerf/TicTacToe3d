@@ -1,20 +1,27 @@
-<div class="login">
-  <div *ngIf="!showRegistration">
-    <h2>Login</h2>
-    <input [(ngModel)]="username">
-    <input [(ngModel)]="password">
-    <button (click)="login()">Login</button>
-  </div>
+<div class="login container" *ngIf="loginChecked">
+  <div *ngIf="loggedIn">
+    <!-- <div>{{modeName}}</div> -->
+    {{username}}
 
-  <button (click)="showRegistration = !showRegistration">
-    {{(showRegistration ? "Back to Login" : "Need to register?" )}}
-  </button>
-  <div *ngIf="showRegistration">
+    <button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="showRegistration && !loggedIn">
     <h2>Registration</h2>
-    <div class="bold">Text</div>
-    <input [(ngModel)]="username">
-    <input [(ngModel)]="password">
-    <button (click)="register()">Register</button>
+    <input [(ngModel)]="formUsername">
+    <input [(ngModel)]="formPassword" (keydown.enter)="register()">
+    <button (click)=" register()">Register</button>
+  </div>
+  <div *ngIf="!showRegistration && !loggedIn">
+    <h2>Login</h2>
+    <input [(ngModel)]="formUsername">
+    <input [(ngModel)]="formPassword" (keydown.enter)="login()">
+    <button (click)=" login()">Login</button>
+  </div>
+  <div *ngIf="!loggedIn">
+    <div class="spacer"></div>
+    <button (click)="showRegistration = !showRegistration">
+      {{(showRegistration ? "&larr; Back to Login" : "Need to register?" )}}
+    </button>
   </div>
 
 </div>

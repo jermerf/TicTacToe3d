@@ -1,0 +1,15 @@
+{
+  "/socket": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "ws": true
+  },
+  "/auth": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/game": {
+    "target": "http://localhost:3000",
+    "secure": false
+  }
+}

@@ -1,0 +1,8 @@
+.game-status {
+  top: -10px;
+}
+.game-status.has-status {
+  top: 25px;
+  transition: top 1s;
+}
+
