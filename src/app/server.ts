@@ -2,9 +2,7 @@ import { environment } from 'src/environments/environment';
 import Axios from 'axios'
 import { GameService } from './game.service';
 
-const SERVER_URL = (environment.production
-  ? "/api"
-  : "/")
+const SERVER_URL = "/"
 
 const ajax = Axios.create({ baseURL: SERVER_URL })
 
