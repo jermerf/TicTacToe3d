@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path')
 const http = require('http')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -39,9 +40,9 @@ app.use('/auth', user)
 app.use('/game', game)
 
 if (process.env.NODE_ENV == 'production') {
-  app.use(express.static('dist'))
-} else {
   app.use(express.static('tests'))
+} else {
+  app.use(express.static(path.join(__dirname, 'dist')))
 }
 
 server.listen(PORT, () => console.log(`Listening on port [ ${PORT} ]`))
