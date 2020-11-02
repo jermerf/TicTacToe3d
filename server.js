@@ -1,7 +1,6 @@
 require('dotenv').config()
 const http = require('http')
 const express = require('express')
-const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
@@ -20,7 +19,7 @@ socketServer(server)
 
 if (process.env.NODE_ENV != 'production') {
   console.log(`DEV: Using cors()`)
-  app.use(cors())
+  app.use(require('cors')())
 }
 
 // Access cookies
@@ -39,6 +38,10 @@ app.use(async (req, res, next) => {
 app.use('/auth', user)
 app.use('/game', game)
 
-app.use(express.static('tests'))
+if (process.env.NODE_ENV == 'production') {
+  app.use(express.static('dist'))
+} else {
+  app.use(express.static('tests'))
+}
 
 server.listen(PORT, () => console.log(`Listening on port [ ${PORT} ]`))
