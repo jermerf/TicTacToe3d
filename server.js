@@ -40,9 +40,9 @@ app.use('/auth', user)
 app.use('/game', game)
 
 if (process.env.NODE_ENV == 'production') {
-  app.use(express.static('tests'))
-} else {
   app.use(express.static(path.join(__dirname, 'dist')))
+} else {
+  app.use(express.static('tests'))
 }
 
 server.listen(PORT, () => console.log(`Listening on port [ ${PORT} ]`))
