@@ -38,7 +38,11 @@ async function getSocket() {
 }
 
 function initSocket() {
-  socket = new WebSocket(`ws://${location.host}/socket`)
+  if (environment.production) {
+    socket = new WebSocket(`wss://${location.host}/socket`)
+  } else {
+    socket = new WebSocket(`ws://${location.host}/socket`)
+  }
   socket.addEventListener('close', () => {
     console.log(`SOCKET CLOSED ***---___`)
     socket = null
