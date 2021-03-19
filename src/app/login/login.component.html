@@ -8,13 +8,13 @@
   <div *ngIf="showRegistration && !loggedIn">
     <h2>Registration</h2>
     <input [(ngModel)]="formUsername">
-    <input [(ngModel)]="formPassword" (keydown.enter)="register()">
+    <input [(ngModel)]="formPassword" (keydown.enter)="register()" type="password">
     <button (click)=" register()">Register</button>
   </div>
   <div *ngIf="!showRegistration && !loggedIn">
     <h2>Login</h2>
     <input [(ngModel)]="formUsername">
-    <input [(ngModel)]="formPassword" (keydown.enter)="login()">
+    <input [(ngModel)]="formPassword" (keydown.enter)="login()" type="password">
     <button (click)=" login()">Login</button>
   </div>
   <div *ngIf="!loggedIn">

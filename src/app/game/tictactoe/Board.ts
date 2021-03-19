@@ -18,21 +18,23 @@ export default class Board extends Group {
 
   constructor() {
     super()
-    let { v1, v2, h1, h2, spacing } = this
+    const { v1, v2, h1, h2, spacing } = this
     v1.position.x = -spacing
     v2.position.x = spacing
     h1.position.y = spacing
     h2.position.y = -spacing
+    h1.position.z += 0.1
+    h2.position.z += 0.1
     this.add(v1, v2, h1, h2)
     this.add(this.letterMeshes)
   }
 
-  setMode(mode) {
+  setMode(mode): void {
     this.mode = mode
   }
 
-  update(dt, time) {
-    for (var l of this.letterMeshes.children) {
+  update(dt, time): void {
+    for (const l of this.letterMeshes.children) {
       if (l instanceof X || l instanceof O) l.update(dt, time)
     }
     switch (this.mode) {
@@ -42,37 +44,41 @@ export default class Board extends Group {
       case GameMode.PLAYER_WAITING:
         this.spinning(dt); break
       case GameMode.PLAYER_PLAYING:
-        this.backToBaseline(time)
+        this.backToBaseline(dt)
     }
   }
 
   theta = 0
-  vTween = new Tween(this.v1.rotation).to({ y: 0 })
-  hTween = new Tween(this.v1.rotation).to({ x: 0 })
-  spinning(dt) {
+  spinning(dt): void {
     this.theta += dt
-    let offset = Math.sin(this.theta / 2000) / 50
+    const offset = Math.sin(this.theta / 2000) / 50
     this.v1.rotation.y += offset
     this.v2.rotation.y += -offset
     this.h1.rotation.x += offset
     this.h2.rotation.x += -offset
   }
 
-  backToBaseline(time) {
-    if (this.v1.rotation.y != 0) {
-      this.vTween.update(time)
-      this.v2.rotation.y = this.v1.rotation.y
+  backToBaseline(dt): void {
+    const vert = this.v1.rotation.y
+    const hori = this.h1.rotation.y
+
+    if (vert === 0 && hori === 0) return
+    this.spinning(dt)
+    // If the spin passed zero
+    if ((vert > 0) !== (this.v1.rotation.y > 0)) {
+      this.v1.rotation.y = 0
+      this.v2.rotation.y = 0
     }
-    if (this.h1.rotation.y != 0) {
-      this.hTween.update(time)
-      this.h2.rotation.y = this.h1.rotation.y
+    if ((hori > 0) !== (this.h1.rotation.y > 0)) {
+      this.h1.rotation.y = 0
+      this.h2.rotation.y = 0
     }
   }
 
-  setBoard(board) {
+  setBoard(board): void {
     for (let i = 0; i < board.length; i++) {
-      let { dx, dy } = indexToOffset(i)
-      let letter = board[i]
+      const { dx, dy } = indexToOffset(i)
+      const letter = board[i]
       let letterMesh = this.letterMeshes[i]
       switch (letter) {
         case '-':

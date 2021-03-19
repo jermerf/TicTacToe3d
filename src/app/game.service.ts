@@ -6,7 +6,7 @@ export enum GameMode {
   LOGGED_OUT, LOBBY, PLAYER_WAITING, PLAYER_PLAYING, OBSERVER
 }
 
-const DEFAULT_USERNAME = " - not logged in -"
+const DEFAULT_USERNAME = ' - not logged in -'
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +30,7 @@ export class GameService {
     server.setGameService(this)
   }
 
-  loggedIn(username, gameInProgress) {
+  loggedIn(username, gameInProgress): void {
     console.log(`LOGGED IN AS ${username}`)
 
     this.currentUsername.next(username)
@@ -40,54 +40,55 @@ export class GameService {
       this.backToLobby()
     }
   }
-  logout() {
+  logout(): void {
     console.log(`LOGGED OUT`)
 
     this.currentUsername.next(DEFAULT_USERNAME)
     this.currentMode.next(GameMode.LOGGED_OUT)
   }
 
-  setLetter(letter) {
+  setLetter(letter): void {
     this.currentLetter.next(letter)
   }
 
-  backToLobby() {
+  backToLobby(): void {
     this.currentMode.next(GameMode.LOBBY)
   }
 
-  joinGame(gameId) {
+  joinGame(gameId): void {
     server.send({ action: 'joinGame', gameId })
   }
 
-  joinedGame(gameId) {
+  joinedGame(gameId): void {
     this.gameId = gameId
     this.currentMode.next(GameMode.PLAYER_WAITING)
   }
 
-  rejoinGame() {
+  rejoinGame(): void {
     this.currentMode.next(GameMode.PLAYER_WAITING)
     server.send({ action: 'rejoinGame' })
   }
 
-  observeGame(gameId) {
+  observeGame(gameId): void {
     this.gameId = gameId
     this.currentMode.next(GameMode.OBSERVER)
     server.send({ action: 'observeGame', gameId })
   }
 
-  setBoard(board) {
+  setBoard(board): void {
     this.currentBoard.next(board)
   }
 
-  myTurn() {
+  myTurn(): void {
     this.currentMode.next(GameMode.PLAYER_PLAYING)
   }
 
-  playAt(position) {
-    server.send({ action: "play", position })
+  playAt(position): void {
+    server.send({ action: 'play', position })
+    this.currentMode.next(GameMode.PLAYER_WAITING)
   }
 
-  gameOver(winner, winCombo) {
+  gameOver(winner, winCombo): void {
     this.currentWinner.next(winner)
     this.currentWinCombo.next(winCombo)
   }
